@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const app = express(); //аналон объекта сервер
 const homeRoutes = require('./routes/home')
 const addRoutes = require('./routes/add')
+const cardRoutes = require('./routes/card')
 const coursesRouts = require('./routes/courses')
 
 
@@ -22,6 +23,7 @@ app.use(express.urlencoded({extended: true}))
 app.use('/', homeRoutes) // для подключения роута
 app.use('/add', addRoutes)
 app.use('/courses',coursesRouts)
+app.use('/card', cardRoutes)
 
 //роут
 app.get('/courses', (req, res)=>{
