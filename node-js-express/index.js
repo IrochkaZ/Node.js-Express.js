@@ -1,15 +1,27 @@
 const express = require('express')
-const path = require('path')
+const exphbs = require('express-handlebars')
 const app = express(); //аналон объекта сервер
 
-app.get('/', (req, res) =>{
-  res.status(200)
-  res.sendFile(path.join(__dirname, 'views', 'index.html'))
+
+//настройка Handlebars 1.1
+const hbs = exphbs.create({
+  defaultLayout: 'main',
+  extname :'hbs'
 })
 
+//настройка Handlebars 1.2
+app.engine('hbs', hbs.engine) //регестрируем движок
+app.set('view engine', 'hbs') // используем уже движок
+app.set('views', 'views')
+
+
+
+app.get('/', (req, res) =>{
+  res.render('index') //настройка Handlebars 1.3
+})
 
 app.get('/about', (req, res)=>{
-  res.sendFile(path.join(__dirname, 'views', 'about.html'))
+  res.render('about')
 })
 
 
@@ -20,5 +32,5 @@ app.get('/about', (req, res)=>{
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, ()=>{
-  console.log(`server is runnong on port ${PORT}`)
+  console.log(`server is running on port ${PORT}`)
 })
