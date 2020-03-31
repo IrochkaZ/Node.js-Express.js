@@ -14,6 +14,8 @@ app.engine('hbs', hbs.engine) //регестрируем движок
 app.set('view engine', 'hbs') // используем уже движок
 app.set('views', 'views')
 
+app.use(express.static('public')) //для подключения папки public,чтобы она была статической
+
 
 
 app.get('/', (req, res) =>{
