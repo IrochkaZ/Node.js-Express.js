@@ -1,6 +1,9 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const app = express(); //аналон объекта сервер
+const homeRoutes = require('./routes/home')
+const addRoutes = require('./routes/add')
+const coursesRouts = require('./routes/courses')
 
 
 //настройка Handlebars 1.1
@@ -15,24 +18,9 @@ app.set('view engine', 'hbs') // используем уже движок
 app.set('views', 'views')
 
 app.use(express.static('public')) //для подключения папки public,чтобы она была статической
-
-
-//роут
-app.get('/', (req, res) =>{
-  res.render('index',{
-    title: "Главная страница",
-    isHome: true//для заголовков страницы 
-  }) //настройка Handlebars 1.3
-})
-
-//роут
-app.get('/add', (req, res)=>{
-  res.render('add',{
-    title: "Добавить курс",
-    isAdd: true
-  })
-})
-
+app.use('/', homeRoutes) // для подключения роута
+app.use('/add', addRoutes)
+app.use('/courses',coursesRouts)
 
 //роут
 app.get('/courses', (req, res)=>{
