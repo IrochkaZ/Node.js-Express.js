@@ -18,6 +18,7 @@ app.set('view engine', 'hbs') // используем уже движок
 app.set('views', 'views')
 
 app.use(express.static('public')) //для подключения папки public,чтобы она была статической
+app.use(express.urlencoded({extended: true}))
 app.use('/', homeRoutes) // для подключения роута
 app.use('/add', addRoutes)
 app.use('/courses',coursesRouts)
