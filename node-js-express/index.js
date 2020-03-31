@@ -17,13 +17,29 @@ app.set('views', 'views')
 app.use(express.static('public')) //для подключения папки public,чтобы она была статической
 
 
-
+//роут
 app.get('/', (req, res) =>{
-  res.render('index') //настройка Handlebars 1.3
+  res.render('index',{
+    title: "Главная страница",
+    isHome: true//для заголовков страницы 
+  }) //настройка Handlebars 1.3
 })
 
-app.get('/about', (req, res)=>{
-  res.render('about')
+//роут
+app.get('/add', (req, res)=>{
+  res.render('add',{
+    title: "Добавить курс",
+    isAdd: true
+  })
+})
+
+
+//роут
+app.get('/courses', (req, res)=>{
+  res.render('courses',{
+    title: "Курсы",
+    isCourses: true
+  })
 })
 
 
