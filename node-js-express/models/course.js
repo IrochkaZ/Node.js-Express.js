@@ -1,4 +1,4 @@
-// const uuid = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const fs = require('fs')
 const path = require('path')
 
@@ -7,7 +7,7 @@ class Course {
       this.title = title
       this.price = price
       this.img = img
-      // this.id = uuid()
+      this.id = uuidv4();
   }
 
   toJSON(){
@@ -15,7 +15,7 @@ class Course {
       title: this.title,
       price: this.price,
       img: this.img,
-      // id: this.id
+      id: this.id
     }
   }
 
@@ -51,6 +51,11 @@ class Course {
         }
       )
     })
+  }
+
+  static async getById(id){
+    const courses = await Course.getAll()
+    return courses.find(c=>c.id === id)
   }
 
 }
